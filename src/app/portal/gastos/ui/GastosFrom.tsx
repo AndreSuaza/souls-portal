@@ -2,8 +2,6 @@
 'use client';
 
 import { postCost } from "@/actions/gastos/insert-gasto";
-import { auth } from "@/auth";
-import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type FormInputs = {
@@ -26,7 +24,7 @@ interface Props {
 export const GastosFrom = ({categories}: Props) => {
 
 
-    const { register, handleSubmit, formState: {errors} } = useForm<FormInputs>();
+    const { register, handleSubmit } = useForm<FormInputs>();
     
     const onSubmit: SubmitHandler<FormInputs> = async(data) => {
      

@@ -1,6 +1,6 @@
 
-import prisma from '../lib/prisma';
-import { initialData } from "./seed-users";
+// import prisma from '../lib/prisma';
+// import { initialData } from "./seed-users";
 
 async function main() {
    
