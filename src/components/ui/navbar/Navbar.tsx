@@ -26,7 +26,7 @@ export default function Navbar() {
         </div>
 
         {/* Nav Links */}
-        <div className={`md:flex md:items-center space-x-6 ${isOpen ? 'block' : 'hidden'}`}>
+        <div className={`md:flex md:items-center space-x-6`}>
           <Link href="/portal/ventas" className="hover:text-gray-400">Ventas</Link>
           <Link href="/portal/gastos" className="hover:text-gray-400">Gastos</Link>
           <button onClick={logout} className='cursor-pointer'><IoLogOutOutline className='w-6 h-6' /></button>
