@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { IoLogOutOutline } from 'react-icons/io5';
@@ -8,7 +7,6 @@ import { logout } from '@/actions';
 
 
 export default function Navbar() {
-  const [isOpen] = useState(false);
 
   return (
     <nav className="bg-gray-900 text-white p-4 shadow-md">
