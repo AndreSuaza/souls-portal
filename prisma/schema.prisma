@@ -1,0 +1,91 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  player
+  admin
+  store
+  seller
+}
+
+model User {
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  email           String        @unique
+  password        String
+  role            Role
+  createdDate     DateTime      @default(now())
+  updatedDate     DateTime      @updatedAt
+
+  Cost            Cost[]
+  Sale            Sale[]
+}
+
+model Category {
+  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  name          String  
+  createDate    DateTime        @default(now())
+
+  Cost          Cost[]
+}
+
+model Cost {
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  value           Float
+  annotation      String?
+  createdDate     DateTime      @default(now())
+  updatedDate     DateTime      @updatedAt
+  
+  user            User          @relation(fields: [userId], references: [id])
+  userId          String        @db.ObjectId
+
+  category        Category      @relation(fields: [categoryId], references: [id])
+  categoryId      String        @db.ObjectId
+}
+
+model Sale {
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  total           Float
+  createdDate     DateTime      @default(now())
+  updatedDate     DateTime      @updatedAt
+
+  user            User          @relation(fields: [userId], references: [id])
+  userId          String        @db.ObjectId
+}
+
+model ProductPortal {
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  name          String        
+  code          String        @unique   
+  description   String
+  url           String        @unique  
+  value         Float
+  price         Float
+  createDate    DateTime      @default(now()) 
+  updatedDate   DateTime      @updatedAt
+
+  SaleProduct          SaleProduct[]
+}
+
+model SaleProduct {
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  amount          Int
+  value           Float
+
+  product            ProductPortal          @relation(fields: [productId], references: [id])
+  productId          String                 @db.ObjectId
+}
