@@ -11,7 +11,7 @@ interface Props {
 
 
 export const GastosList = ({costs}:Props) => {
-    console.log(costs);
+
   return (
     <div className="mt-10">
         <h2 className="text-bold text-slate-950 mb-2 font-bold text-xl">Gastos</h2>

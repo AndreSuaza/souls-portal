@@ -28,9 +28,7 @@ export const GastosFrom = ({categories}: Props) => {
     
     const onSubmit: SubmitHandler<FormInputs> = async(data) => {
      
-    const result = await postCost({name: data.nombre, value: Number.parseFloat(data.valor.toString()), annotation: data.comentario, categoryId: data.categoria});
-    
-    console.log(result);
+    await postCost({name: data.nombre, value: Number.parseFloat(data.valor.toString()), annotation: data.comentario, categoryId: data.categoria});
      
     }
 

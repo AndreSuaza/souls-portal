@@ -20,7 +20,7 @@ export const authConfig: NextAuthConfig = {
       
       const isLoggedIn = !!auth?.user;
       const isOnDashboard = nextUrl.pathname.startsWith('/portal');
-      console.log(auth?.user)
+
       if ( isLoggedIn ) return true;
       if ( isOnDashboard ) {
         return Response.redirect(new URL('/auth/login', nextUrl));
