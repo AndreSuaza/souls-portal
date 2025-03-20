@@ -18,7 +18,7 @@ export const getCost = async() => {
                 },
             ],
         })
-    
+        console.log('costs',costs);
         return costs.map(cost => { return {...cost, nombreCategoria: cost.category.name}})
         
     } catch (error) {
