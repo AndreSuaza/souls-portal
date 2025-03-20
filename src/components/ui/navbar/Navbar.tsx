@@ -1,35 +1,77 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
-import { IoLogOutOutline } from 'react-icons/io5';
+import { IoClose, IoLogOutOutline, IoMenu } from 'react-icons/io5';
 import { logout } from '@/actions';
+import { useState } from 'react';
 
 
 export default function Navbar() {
-
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <nav className="bg-gray-900 text-white p-4 shadow-md">
-      <div className="container mx-auto flex justify-between items-center">
-        {/* Logo */}
-        <div className="flex flex-grow">
-        <Image
-            src={`/souls-in-xtinction-logo-sm.png`}
-            alt={'logo-icono-souls-in-xtinction'}
-            className='w-12 h-12'
-            width={40}
-            height={40}
-        />
-        <span className={`antialiased font-bold my-auto ml-2`}> Souls In Xtinction | TCG</span>
-        </div>
+    <nav className="bg-white shadow-lg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16 items-center">
+          {/* Logo */}
+          <div className="text-2xl font-bold">Souls In Xtinction | TCG</div>
 
-        {/* Nav Links */}
-        <div className={`md:flex md:items-center space-x-6`}>
-          <Link href="/portal/ventas" className="hover:text-gray-400">Ventas</Link>
-          <Link href="/portal/gastos" className="hover:text-gray-400">Gastos</Link>
-          <button onClick={logout} className='cursor-pointer'><IoLogOutOutline className='w-6 h-6' /></button>
+          {/* Desktop Menu */}
+          <div className="hidden md:flex space-x-6">
+
+            <Link href="/" className="text-gray-700 hover:text-indigo-500 font-medium transition">
+              Inicio
+            </Link>
+            <Link href="/portal/ventas" className="text-gray-700 hover:text-indigo-500 font-medium transition">
+              Ventas
+            </Link>
+            <Link href="/portal/gastos" className="text-gray-700 hover:text-indigo-500 font-medium transition">
+              Gastos
+            </Link>
+            <button onClick={logout} className="text-gray-700 hover:text-indigo-500 font-medium transition">
+              <IoLogOutOutline className='w-6 h-6' />
+            </button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <button 
+              className="text-gray-700 focus:outline-none"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? <IoClose className="w-6 h-6"/> : <IoMenu className="w-6 h-6"/>}
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-white shadow-lg absolute top-16 left-0 w-full transition">
+          <div className="flex flex-col items-center space-y-4 py-4">
+            <Link 
+              href="/" className="text-gray-700 hover:text-indigo-500 font-medium transition"
+              onClick={() => setIsOpen(false)}
+            >
+              Inicio
+            </Link>
+            <Link 
+              href="/portal/ventas" className="text-gray-700 hover:text-indigo-500 font-medium transition"
+              onClick={() => setIsOpen(false)}
+            >
+              Ventas
+            </Link>
+            <Link 
+              href="/portal/gastos" className="text-gray-700 hover:text-indigo-500 font-medium transition"
+              onClick={() => setIsOpen(false)}
+            >
+              Gastos
+            </Link>
+            <button onClick={logout} className="text-indigo-500 hover:text-indigo-800 font-medium transition">
+              Logout
+            </button>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

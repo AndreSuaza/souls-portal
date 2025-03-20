@@ -7,7 +7,7 @@ export default async function Gastos() {
 
   return (
     <>
-    <h1 className="text-2xl mb-6">Ingresar Gastos</h1>
+    <h1 className="text-2xl my-6 font-bold">Gastos</h1>
     <GastosFrom categories={categories}/>  
     </>
   )

@@ -14,6 +14,7 @@ interface Cost {
 }
 
 export const postCost = async(cost : Cost) => {
+    console.log(cost);
     try {
         const session = await auth();
         if(session?.user?.id) {
@@ -26,7 +27,7 @@ export const postCost = async(cost : Cost) => {
             }
         }
     } catch (error) {
-
+        console.log(error);
        return {
         ok: false,
         message: `No se pudo crear el gasto ${error}`
