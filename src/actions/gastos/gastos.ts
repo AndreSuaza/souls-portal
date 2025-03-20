@@ -14,7 +14,7 @@ export const getCost = async() => {
             },
             orderBy: [
                 {
-                    createdDate: 'asc',
+                    createdDate: 'desc',
                 },
             ],
         })
